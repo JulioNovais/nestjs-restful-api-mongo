@@ -13,7 +13,7 @@ import { ProductModule } from './modules/product/product.module';
     AuthModule,
 
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGO_CONNECTION_KEY as string),
+    MongooseModule.forRoot('mongodb://localhost:27017/local'),
     ProductModule,
   ],
   controllers: [AppController],
