@@ -1,15 +1,14 @@
-import mongoose, { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { genSalt, hash, compare } from 'bcrypt-ts';
-import { UUID } from 'crypto';
+
 export type ProductDocument = HydratedDocument<Product>;
 
 @Schema()
 export class Product {
   _id: string;
 
-  @Prop({ type: mongoose.Schema.Types.String, ref: 'Advisor' })
-  advisorId: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Advisor' })
+  advisorId: Types.ObjectId;
 
   @Prop({ required: true })
   name: string;

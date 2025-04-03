@@ -15,7 +15,6 @@ export class Advisor {
 
   @Prop({
     required: true,
-    minlength: 8,
   })
   password: string;
 

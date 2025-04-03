@@ -7,7 +7,7 @@ import {
 import { CreateProductDto } from './dto/create-product.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product } from './schemas/product.schema';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { AuthService } from '../auth/auth.service';

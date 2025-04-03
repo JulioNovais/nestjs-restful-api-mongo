@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Advisor } from './schemas/advisor.schema';
 import { Model } from 'mongoose';
@@ -11,8 +11,18 @@ export class AdvisorService {
   ) {}
 
   async create(createAdvisorDto: CreateAdvisorDto): Promise<Advisor> {
-    const createdAdvisor = new this.advisorModel(createAdvisorDto);
-    return createdAdvisor.save();
+    try {
+      const createdAdvisor = new this.advisorModel(createAdvisorDto);
+
+      return await createdAdvisor.save();
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new BadRequestException(
+          'Theres already a advisor with this email',
+        );
+      }
+      return Promise.reject(error as Error);
+    }
   }
 
   async findAll(): Promise<Advisor[]> {
